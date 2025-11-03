@@ -1,11 +1,11 @@
-class Node {
+export class Node {
   constructor(data, next) {
     this.data = data
     this.next = next
   }
 }
 
-class Linkedlist {
+export class Linkedlist {
   constructor(head, tail) {
     this.head = null
     this.tail = null
@@ -114,15 +114,5 @@ class Linkedlist {
   }
 }
 
-const list = new Linkedlist()
 
-list.prepend('one')
-list.prepend('two')
-list.prepend('three')
-list.append('jilly')
-list.append('joe')
-
-list.append('sdfdsf')
-list.insertAt(5, 'hi')
-
-console.log(list.listToString())
+console.log("hello");
