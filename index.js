@@ -62,6 +62,9 @@ class Linkedlist {
   }
 
   nodeAt(index) {
+    if (index > this.size()) {
+      return 'This index exceeds the size of the list'
+    }
     let currNode = this.head
     let currIndex = 0
 
@@ -78,10 +81,36 @@ class Linkedlist {
     let listString = ''
 
     while (currNode.next !== null) {
-      listString += `(${currNode.data}) -> `
+      listString += `( ${currNode.data} ) -> `
       currNode = currNode.next
     }
-    return `${listString} (${currNode.data})`
+    return `${listString} ( ${currNode.data} )`
+  }
+
+  insertAt(index, value) {
+    if (index > this.size()) {
+      return 'This index exceeds the size of the list'
+    }
+
+    if (index === this.size()) {
+      this.append(value)
+      return
+    }
+
+    let nextNode = this.nodeAt(index)
+    let previousNode = this.head
+    let currNode = this.head
+    let currIndex = 0
+
+    while (index > currIndex) {
+      previousNode = currNode
+      currNode = currNode.next
+      currIndex++
+    }
+
+    let insertedNode = new Node(value, nextNode)
+    previousNode.next = insertedNode
+    return
   }
 }
 
@@ -94,5 +123,6 @@ list.append('jilly')
 list.append('joe')
 
 list.append('sdfdsf')
+list.insertAt(5, 'hi')
 
 console.log(list.listToString())
