@@ -112,17 +112,47 @@ class Linkedlist {
     previousNode.next = insertedNode
     return
   }
+
+  removeAt(index) {
+    if (index >= this.size() || index < 0) {
+      return 'There are no nodes present at the given index'
+    }
+
+    if (index === 0) {
+      let newHead = this.head.next
+      this.head = null
+      this.head = newHead
+      return
+    }
+
+    let previousNode = this.head
+    let currNode = this.head
+    let currIndex = 0
+
+    while (index > currIndex) {
+      previousNode = currNode
+      currNode = currNode.next
+      currIndex++
+    }
+
+    let newNodeToConnect = currNode.next
+    previousNode.next = null
+    previousNode.next = newNodeToConnect
+    return listToString()
+  }
 }
 
 const list = new Linkedlist()
 
-list.prepend('one')
-list.prepend('two')
-list.prepend('three')
+// list.prepend('one')
+// list.prepend('two')
+// list.prepend('three')
 list.append('jilly')
 list.append('joe')
 
 list.append('sdfdsf')
-list.insertAt(5, 'hi')
+list.append('kichu')
+
+console.log(list.removeAt(1))
 
 console.log(list.listToString())
