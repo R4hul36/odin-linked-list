@@ -1,6 +1,6 @@
 export class Node {
-  constructor(data, next) {
-    this.data = data
+  constructor(value, next) {
+    this.value = value
     this.next = next
   }
 }
@@ -11,25 +11,25 @@ export class Linkedlist {
     this.tail = null
   }
 
-  prepend(data) {
+  prepend(value) {
     if (this.head) {
-      let nd = new Node(data, this.head)
+      let nd = new Node(value, this.head)
       this.head = nd
     } else {
-      this.head = new Node(data, null)
+      this.head = new Node(value, null)
     }
   }
 
-  append(data) {
+  append(value) {
     if (this.head) {
       let currNode = this.head
 
       while (currNode.next !== null) {
         currNode = currNode.next
       }
-      currNode.next = new Node(data, null)
+      currNode.next = new Node(value, null)
     } else {
-      this.head = new Node(data, null)
+      this.head = new Node(value, null)
     }
   }
 
@@ -75,16 +75,58 @@ export class Linkedlist {
     return currNode
   }
 
+  pop() {
+    let currNode = this.head
+    let prevNode = this.head
+
+    while (currNode.next !== null) {
+      prevNode = currNode
+      currNode = currNode.next
+    }
+    prevNode.next = null
+  }
+
+  contains(value) {
+    let currNode = this.head
+    if (currNode.value === value) {
+      return true
+    }
+    let isValue = false
+
+    while (currNode.next !== null) {
+      currNode = currNode.next
+      if (currNode.value === value) {
+        isValue = true
+      }
+    }
+    return isValue
+  }
+
+  find(value) {
+    let currNode = this.head
+    let index = 0
+
+    while (currNode.value !== value) {
+      currNode = currNode.next
+      index++
+      if (index >= this.size()) {
+        return "This value doesn't exist in the list"
+      }
+    }
+
+    return index
+  }
+
   listToString() {
     let currNode = this.head
 
     let listString = ''
 
     while (currNode.next !== null) {
-      listString += `( ${currNode.data} ) -> `
+      listString += `( ${currNode.value} ) -> `
       currNode = currNode.next
     }
-    return `${listString} ( ${currNode.data} )`
+    return `${listString} ( ${currNode.value} )`
   }
 
   insertAt(index, value) {
@@ -138,7 +180,7 @@ export class Linkedlist {
     let newNodeToConnect = currNode.next
     previousNode.next = null
     previousNode.next = newNodeToConnect
-    return listToString()
+    return
   }
 }
 
@@ -152,5 +194,8 @@ list.append('joe')
 
 list.append('sdfdsf')
 list.insertAt(5, 'hi')
+list.removeAt(2)
+list.pop()
+console.log(list.contains('his'))
 
-console.log('hello')
+console.log(list.listToString())
