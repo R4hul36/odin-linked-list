@@ -1,5 +1,4 @@
-import { Linkedlist } from "./index.js"
-
+import { Linkedlist } from './index.js'
 
 const list = new Linkedlist()
 
@@ -8,8 +7,16 @@ list.prepend('two')
 list.prepend('three')
 list.append('jilly')
 list.append('joe')
+list.listToString()
 
-list.append('sdfdsf')
-list.insertAt(5, 'hi')
+list.insertAt(2, 'hi')
+list.listToString()
 
-console.log(list.listToString())
+list.listToString(list.removeAt(2))
+list.contains('two')
+list.find('joe')
+list.getHead()
+list.getTail()
+list.nodeAt(3)
+
+list.listToString()

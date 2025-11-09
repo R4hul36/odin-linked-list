@@ -6,9 +6,8 @@ export class Node {
 }
 
 export class Linkedlist {
-  constructor(head, tail) {
+  constructor() {
     this.head = null
-    this.tail = null
   }
 
   prepend(value) {
@@ -21,15 +20,16 @@ export class Linkedlist {
   }
 
   append(value) {
+    const nodeToAppend = new Node(value, null)
     if (this.head) {
       let currNode = this.head
 
       while (currNode.next !== null) {
         currNode = currNode.next
       }
-      currNode.next = new Node(value, null)
+      currNode.next = nodeToAppend
     } else {
-      this.head = new Node(value, null)
+      this.head = nodeToAppend
     }
   }
 
@@ -49,6 +49,8 @@ export class Linkedlist {
   }
 
   getHead() {
+    console.log(this.head)
+
     return this.head
   }
 
@@ -58,6 +60,8 @@ export class Linkedlist {
     while (currNode.next !== null) {
       currNode = currNode.next
     }
+    console.log(currNode)
+
     return currNode
   }
 
@@ -72,6 +76,8 @@ export class Linkedlist {
       currNode = currNode.next
       currIndex++
     }
+    console.log(currNode)
+
     return currNode
   }
 
@@ -99,6 +105,8 @@ export class Linkedlist {
         isValue = true
       }
     }
+    console.log(isValue)
+
     return isValue
   }
 
@@ -113,12 +121,13 @@ export class Linkedlist {
         return "This value doesn't exist in the list"
       }
     }
+    console.log(`${value} is at index ${index}`)
 
     return index
   }
 
-  listToString() {
-    let currNode = this.head
+  listToString(list = null) {
+    let currNode = list ? list : this.head
 
     let listString = ''
 
@@ -126,11 +135,15 @@ export class Linkedlist {
       listString += `( ${currNode.value} ) -> `
       currNode = currNode.next
     }
+    console.log(`${listString} ( ${currNode.value} )`)
+
     return `${listString} ( ${currNode.value} )`
   }
 
   insertAt(index, value) {
     if (index > this.size()) {
+      console.log('This index exceeds the size of the list')
+
       return 'This index exceeds the size of the list'
     }
 
@@ -183,19 +196,3 @@ export class Linkedlist {
     return
   }
 }
-
-const list = new Linkedlist()
-
-list.prepend('one')
-list.prepend('two')
-list.prepend('three')
-list.append('jilly')
-list.append('joe')
-
-list.append('sdfdsf')
-list.insertAt(5, 'hi')
-list.removeAt(2)
-list.pop()
-console.log(list.contains('his'))
-
-console.log(list.listToString())
