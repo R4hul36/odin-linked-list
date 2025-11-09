@@ -13,7 +13,7 @@ list.insertAt(2, 'hi')
 list.listToString()
 
 list.listToString(list.removeAt(2))
-list.contains('two')
+list.contains('twso')
 list.find('joe')
 list.getHead()
 list.getTail()

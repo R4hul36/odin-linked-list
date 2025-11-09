@@ -82,6 +82,10 @@ export class Linkedlist {
   }
 
   pop() {
+    if (this.head === null) {
+      console.log('There are no nodes present')
+      return
+    }
     let currNode = this.head
     let prevNode = this.head
 
@@ -103,6 +107,7 @@ export class Linkedlist {
       currNode = currNode.next
       if (currNode.value === value) {
         isValue = true
+        break
       }
     }
     console.log(isValue)
